@@ -1,14 +1,9 @@
 {
-	"name": "Stylish",
-	"version": "1.4.0",
+	"name": "ESI Stylish",
+	"version": "1.2.0",
 	"description": "__MSG_description__",
-	"homepage_url": "https://userstyles.org",
+	"homepage_url": "http://dreamject.ru/dreamjects/esi/support/",
 	"manifest_version": 2,
-	"applications": {
-		"gecko": {
-			"id": "{46551EC9-40F0-4e47-8E18-8E5CF550CFB8}"
-		}
-	},
 	"icons": {
 		"16": "16.png",
 		"48": "48.png",
@@ -20,10 +15,12 @@
 		"contextMenus",
 		"storage",
 		"http://userstyles.org/",
-		"https://userstyles.org/"
+		"https://userstyles.org/",
+		"http://dreamject.org/", 
+		"http://dreamject.ru/" 
 	],
 	"background": {
-		"scripts": ["messaging.js", "storage.js", "background.js"]
+		"page": "background.html"
 	},
 	"commands": {
 	  "openManage": {
@@ -53,7 +50,7 @@
 			"19": "19w.png",
 			"38": "38w.png"
 		},
-		"default_title": "Stylish",
+		"default_title": "ESI Stylish",
 		"default_popup": "popup.html"
 	},
 	"default_locale": "en"

@@ -67,6 +67,9 @@ function dbV14(d, error, done) {
 }
 
 function dbV15(d, error, done) {
+	if (!("show-badge" in localStorage)) {
+		localStorage["show-badge"] = true;
+	}
 	d.changeVersion(d.version, '1.5', function (t) {
 		t.executeSql('ALTER TABLE styles ADD COLUMN originalMd5 TEXT NULL;');
 	}, error, function() { done(d); });
