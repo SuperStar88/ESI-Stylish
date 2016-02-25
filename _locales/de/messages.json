@@ -412,8 +412,19 @@
 		"message": "Type a command name",
 		"description": "Placeholder text of inputbox in keymap help popup on the edit style page. Must be very short"
 	},
+	"desc": {
+		"message": "Nutzerstile sind Designs für Websites, mit denen Nutzer Websites anpassen und somit noch reibungsloser surfen können: Entfernen Sie nicht relevante Inhalte, ändern Sie Farben oder gestalten Sie eine komplette Website um.\n\nMit Stylish ist das Verwalten Ihrer Nutzerstile ganz einfach. Sie können mit wenigen Klicks Stile hinzufügen, löschen, aktivieren und deaktivieren oder ordnen, ohne dass Sie Code bearbeiten oder versteckte Konfigurationen suchen müssen. Auf userstyles.org, der Partner-Website von Stylish, stehen Ihnen unzählige Nutzerstile zur Auswahl, die von anderen Nutzern entworfen wurden.\n\nEin Hinweis für alle Technikfreaks: Stylish und userstyles.org erfüllen bei CSS die gleiche Funktion wie Greasemonkey und userscripts.org bei JavaScript.\n\n*** Wenn Sie Hilfe benötigen, stellen Sie Ihre Fragen bitte auf http://forum.userstyles.org. Wenn Sie Ihre Fragen hier posten, kann ich sie nicht beantworten."
+    },
 	"description": {
-		"message": "Gestalten Sie das Web mit Stylish, einem Manager für Benutzer-Styles, um. Stylish lässt Sie ganz einfach Themes und Skins für viele beliebte Webseiten installieren.",
+		"message": "Improve vision and posture in a few clicks thanks to ESI styles!",
 		"description": "Extension description"
-	}
+	},
+    "esifindStylesForSite": {
+		"description": "Text for a link that gets a list of ESI styles for the current site",
+		"message": "Mehr ESI Stile für diese Website finden"
+    },
+    "esihelp": {
+		"description": "Get support for ESI",
+		"message": "Get support for ESI styles."
+    }
 }
