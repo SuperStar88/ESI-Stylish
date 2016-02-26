@@ -65,7 +65,7 @@ function createStyleElement(style) {
 					return array.indexOf(value) == -1;
 				}).forEach(function(value) {
 					array.push(value);
-				});;
+				});
 			}
 		});
 	}
