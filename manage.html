@@ -6,6 +6,9 @@
 				margin: 0;
 				font: 16px arial,sans-serif;
 			}
+			input, button {
+				font-size: 16px;
+			}
 			a, a:visited {
 				color: #555;
 				-webkit-transition: color 0.5s;
@@ -15,19 +18,23 @@
 			}
 			#header {
 				height: 100%;
-				width: 289px;
+				width: 270px;
 				position: fixed;
 				top: 0;
 				padding: 15px;
 				border-right: 1px dashed #AAA;
 				-webkit-box-shadow: 0 0 50px -18px black;
 			}
-			#header > img {
+			#header #logo{
+				padding-bottom: 5px;
+			}
+			#header .icon {
 				display: block;
 				margin: 0 auto;
 			}
 			#header h1 {
 				text-align: center;
+				margin: 0;
 			}
 			#installed {
 				position: relative;
@@ -165,8 +172,10 @@
 	</head>
 	<body id="stylish-manage">
 		<div id="header">
-			<img src="128.png">
+			<div id="logo">
+			<img class="icon" src="64.png">
 			<h1 id="manage-heading" i18n-text="manageHeading"></h1>
+			</div>
 			<p id="manage-text" i18n-html="manageText"></p>
 			<fieldset>
 				<legend id="filters" i18n-text="manageFilters"></legend>

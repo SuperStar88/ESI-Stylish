@@ -36,23 +36,30 @@
 		<script src="codemirror/keymap/vim.js"></script>
 
 		<style type="text/css">
-
 			body {
 				margin: 0;
-				font: 9pt arial,sans-serif;
+				font: 16px arial,sans-serif;
 			}
 			/************ header ************/
 			#header {
 				height: 100%;
-				width: 15rem;
+				width: 16rem;
 				position: fixed;
 				top: 0;
 				padding: 0.95rem;
 				border-right: 1px dashed #AAA;
 				-webkit-box-shadow: 0 0 3rem -1.2rem black;
 			}
+			#header #logo{
+				padding-bottom: 5px;
+			}
+			#header .icon {
+				display: block;
+				margin: 5px;
+				float: left;
+			}
 			#header h1 {
-				margin-top: 0;
+				margin: 2px;
 			}
 			#sections {
 				padding-left: 18rem;
@@ -555,7 +562,10 @@
 	</head>
 	<body id="stylish-edit">
 		<div id="header">
+			<div id="logo">
+			<img class="icon" src="64.png">
 			<h1 id="heading">&nbsp;</h1> <!-- nbsp allocates the actual height which prevents page shift -->
+			</div>
 			<section id="basic-info">
 				<div id="basic-info-name">
 					<input id="name" class="style-contributor" i18n-placeholder="styleMissingName">
@@ -592,6 +602,7 @@
 					<input data-option="indentWithTabs" id="editor.indentWithTabs" type="checkbox">
 					<label id="indentWithTabs-label" for="editor.indentWithTabs" i18n-text="cm_indentWithTabs"></label>
 				</div>
+				<br>
 				<div class="option aligned">
 					<label id="tabSize-label" for="editor.tabSize" i18n-text="cm_tabSize"></label>
 					<input data-option="tabSize" id="editor.tabSize" type="number" min="0">
