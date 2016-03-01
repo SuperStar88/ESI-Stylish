@@ -1,6 +1,6 @@
 {
 	"name": "ESI Stylish",
-	"version": "1.2.0",
+	"version": "1.4.0",
 	"description": "__MSG_description__",
 	"homepage_url": "http://dreamject.ru/dreamjects/esi/support/",
 	"manifest_version": 2,
@@ -17,10 +17,10 @@
 		"http://userstyles.org/",
 		"https://userstyles.org/",
 		"http://dreamject.org/", 
-		"http://dreamject.ru/" 
+		"http://dreamject.ru/"
 	],
 	"background": {
-		"page": "background.html"
+		"scripts": ["messaging.js", "storage.js", "background.js"]
 	},
 	"commands": {
 	  "openManage": {
