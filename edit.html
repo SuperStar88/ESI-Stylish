@@ -44,7 +44,7 @@
 			#header {
 				height: 100%;
 				width: 16rem;
-				position: fixed;
+				position: absolute;
 				top: 0;
 				padding: 0.95rem;
 				border-right: 1px dashed #AAA;
@@ -64,8 +64,8 @@
 			#sections {
 				padding-left: 18rem;
 			}
-			#sections h2 {
-				margin-top: 0.5rem;
+			section h2 {
+				margin: 0.5rem 0;
 			}
 			.aligned {
 				display: table-row;
@@ -85,7 +85,7 @@
 			}
 			/* basic info */
 			#basic-info {
-				margin-bottom: 1rem;
+				/*margin-bottom: 1rem;*/
 			}
 			#name {
 				width: 100%;
@@ -115,8 +115,8 @@
 			}
 			/* actions */
 			#actions > * {
+				display: inline-block;
 				margin-right: 0.5rem;
-				margin-bottom: 0.5rem;
 			}
 			/* options */
 			#options [type="number"] {
@@ -578,9 +578,12 @@
 			</section>
 			<section id="actions">
 				<div>
-					<button id="save-button" title="Ctrl-S" i18n-text="styleSaveLabel"></button>
-					<button id="beautify" i18n-text="styleBeautify"></button>
-					<a href="manage.html"><button id="cancel-button" i18n-text="styleCancelEditLabel"></button></a>
+					<button id="save-button" title="Save (Ctrl-S)">
+                    <img src="icons/save16.png" alt="save"></button>
+					<button id="beautify" title="Edit">
+                    <img src="icons/edit16.png" alt="edit"></button>
+					<a href="manage.html"><button id="cancel-button" title="Cancel">
+                    <img src="icons/cancel16.png" alt="cancel"></button></a>
 				</div>
 				<div>
 					<h2 id="mozilla-format-heading" i18n-text="styleMozillaFormatHeading"><img id="to-mozilla-help" src="help.png"></h2>
