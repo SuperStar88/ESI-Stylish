@@ -118,6 +118,30 @@
 				display: inline-block;
 				margin-right: 0.5rem;
 			}
+			#actions #save-button {
+				background-image: url(icons/save32.png);
+				background-size: cover;
+				width: 24px;
+				height: 24px;
+			}
+			#actions #save-button[disabled] {
+				background-image: url(icons/nosave32.png);
+				background-size: cover;
+				width: 24px;
+				height: 24px;
+			}
+			#actions #beautify {
+				background-image: url(icons/edit32.png);
+				background-size: cover;
+				width: 24px;
+				height: 24px;
+			}
+			#actions #cancel-button {
+				background-image: url(icons/cancel32.png);
+				background-size: cover;
+				width: 24px;
+				height: 24px;
+			}
 			/* options */
 			#options [type="number"] {
 				max-width: 2.5rem;
@@ -578,12 +602,9 @@
 			</section>
 			<section id="actions">
 				<div>
-					<button id="save-button" title="Save (Ctrl-S)">
-                    <img src="icons/save16.png" alt="save"></button>
-					<button id="beautify" title="Edit">
-                    <img src="icons/edit16.png" alt="edit"></button>
-					<a href="manage.html"><button id="cancel-button" title="Cancel">
-                    <img src="icons/cancel16.png" alt="cancel"></button></a>
+					<button id="save-button" title="Save (Ctrl-S)"></button>
+					<button id="beautify" title="Edit"></button>
+					<a href="manage.html"><button id="cancel-button" title="Cancel"></button></a>
 				</div>
 				<div>
 					<h2 id="mozilla-format-heading" i18n-text="styleMozillaFormatHeading"><img id="to-mozilla-help" src="help.png"></h2>
