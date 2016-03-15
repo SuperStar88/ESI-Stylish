@@ -19,6 +19,10 @@
 			.style-name {
 				font-weight: bold;
 			}
+			.style-name img {
+				width: 16px;
+				height: 16px;
+			}
 			a, a:visited {
 				color: #000/*#072*/;
 				text-decoration:none;
@@ -35,9 +39,35 @@
 			border-radius: 2px;
 			}
 			.entry {
-				padding-bottom: 0.5em;
-				margin-bottom: 0.5em;
+				padding-bottom: 2em;
 				border-bottom: 1px solid black;
+			}
+			.style-title {
+				float: left;
+			}
+			.actions {
+				float: right;
+			}
+			.actions a {
+				display: block;
+				float: left;
+				width: 24px;
+				height: 24px;
+				margin: 4px 2px;
+				padding: 0;
+				background-size: cover;
+			}
+			.actions .style-edit-link {
+				background-image: url(icons2/edit_property-32.png);
+			}
+			.actions .enable {
+				background-image: url(icons2/switch_off-32.png);
+			}
+			.actions .disable {
+				background-image: url(icons2/switch_on-32.png);
+			}
+			.actions .delete {
+				background-image: url(icons2/delete-32.png);
 			}
 			#no-styles {
 				font-weight: bold;

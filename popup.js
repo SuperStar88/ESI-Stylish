@@ -1,12 +1,12 @@
 var styleTemplate = document.createElement("div");
-styleTemplate.innerHTML = "<div class='style-name'></div><div class='actions'><a class='style-edit-link' href='edit.html?id='>" + t('editStyleLabel') + "</a> <a href='#' class='enable'>" + t('enableStyleLabel') + "</a> <a href='#' class='disable'>" + t('disableStyleLabel') + "</a> <a href='#' class='delete'>" + t('deleteStyleLabel') + "</a></div>";
+styleTemplate.innerHTML = "<div class='style-name'></div>";
 
 chrome.tabs.getSelected(null, function(tab) {
-	chrome.extension.sendMessage({method: "getStyles", matchUrl: tab.url}, showStyles);
+	chrome.runtime.sendMessage({method: "getStyles", matchUrl: tab.url}, showStyles);
 	document.querySelector("#esifind-styles a").href = "http://userstyles.org/styles/browse/all/" + encodeURIComponent(tab.url)+"%20esi";
 });
 chrome.tabs.getSelected(null, function(tab) {
-	chrome.extension.sendMessage({method: "getStyles", matchUrl: tab.url});
+	chrome.runtime.sendMessage({method: "getStyles", matchUrl: tab.url});
 	document.querySelector("#find-styles a").href = "http://userstyles.org/styles/browse/all/" + encodeURIComponent(tab.url);
 });
 chrome.tabs.getSelected(null, function(tab) {
@@ -28,7 +28,9 @@ function createStyleElement(style) {
 	e.setAttribute("class", "entry " + (style.enabled == "true" ? "enabled" : "disabled"));
 	e.setAttribute("style-id", style.id);
 	var styleName = e.querySelector(".style-name");
-	styleName.appendChild(document.createTextNode(style.name));
+	var styleN = document.createElement("div");
+	styleN.setAttribute("class", "style-title");
+	styleN.appendChild(document.createTextNode(style.name));
 	if (style.url) {
 		var homepage = document.createElement("a");
 		homepage.setAttribute("href", style.url);
@@ -37,8 +39,13 @@ function createStyleElement(style) {
 		homepageImg.src = "world_go.png";
 		homepageImg.alt = "*";
 		homepage.appendChild(homepageImg);
-		styleName.appendChild(document.createTextNode(" " ));
-		styleName.appendChild(homepage);
+		styleN.appendChild(document.createTextNode(" " ));
+		styleN.appendChild(homepage);
+		var actions = document.createElement("div");
+		actions.setAttribute("class", "actions");
+		actions.innerHTML = "<a href='#' class='delete'></a> <a class='style-edit-link' href='edit.html?id='></a> <a href='#' class='enable'></a> <a href='#' class='disable'></a>";
+		styleName.appendChild(styleN);
+		styleName.appendChild(actions);
 	}
 	var editLink = e.querySelector(".style-edit-link");
 	editLink.setAttribute("href", editLink.getAttribute("href") + style.id);
