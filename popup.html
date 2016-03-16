@@ -1,14 +1,174 @@
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<style>
 		*{font-family:tahoma, sans-serif}
 			body {
-				font-size:19px;
-				line-height:136%;
-				width:408px;
+				font-size: 19px;
+				line-height: 136%;
+				width: 405px;
+			}
+			.style-name {
+				display: table-cell;
+				font-weight: bold;
+				padding-left: 5px;
+				width: calc(100% - 100px);
+			}
+			.style-name a {
+				padding: 0 5px;
+			}
+			.style-name img {
+				width: 16px;
+				height: 16px;
+			}
+			.checker {
+				display: inline;
+			}
+			a, a:visited {
+				color: black;
+				text-decoration:none;
+			}
+			a:hover {
+				color: #a60;
+				background: rgba(119, 119, 119, 0.2);
+				text-decoration: none;
+				-webkit-border-radius: 2px;
+				-khtml-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+			}
+
+			.left-gutter {
+				display: none;
+				width: 16px;
+				vertical-align: middle;
+			}
+			.left-gutter input {
+				margin-top: 0;
+				margin-left: 0;
+			}
+			.main-controls {
+				display: table;
+				width: 100%;
+			}
+
+			.entry {
+				padding: 0.5em 0;
+				border-bottom: 1px solid black;
+			}
+			.entry:first-child {
+				padding-top: 0;
+			}
+			.entry:last-child {
+				border-bottom: none;
+			}
+			body > DIV {
+				border-bottom: 1px solid black;
+				padding-bottom: 2px;
+			}
+			body > DIV:last-of-type,
+			body.blocked > DIV {
+				border-bottom: none;
+			}
+			#installed {
+				margin-top: 0.5em;
+			}
+			#installed.disabled .style-name {
+				text-decoration: line-through;
+			}
+			#installed .actions a {
+				margin-right: 0.2em;
+			}
+			body > .actions {
+				margin-top: 0.5em;
+				margin-left: 0.5em;
+			}
+
+			.actions > div:not(:last-child):not(#disable-all-wrapper), .actions > .main-controls > div:not(:last-child), #unavailable:not(:last-child), #unavailable + .actions {
+				margin-bottom: 0.25em;
+			}
+			.actions input, .actions label {
+				vertical-align: middle;
+			}
+
+			#unavailable {
+				border: none;
+				display: none;
+			}
+			body.blocked #installed,
+			body.blocked #find-styles,
+			body.blocked #write-style,
+			body.blocked #esifind-styles,
+			body:not(.blocked) #unavailable {
+				display: none;
+			}
+
+		/* 'New style' links */
+			#write-style-for {margin-right: .6ex}
+			.write-style-link {margin-left: .6ex}
+			.write-style-link::before, .write-style-link::after {font-size: x-small}
+			.write-style-link::before {content: "\00ad"} /* "soft" hyphen */
+			#match {overflow-wrap: break-word;}
+
+			/* "breadcrumbs" 'new style' links */
+			.breadcrumbs > .write-style-link {margin-left: 0}
+			.breadcrumbs:hover a {color: #bbb; text-decoration: none}
+
+				/* use just the subdomain name instead of the full domain name */
+			.breadcrumbs > .write-style-link[subdomain]:not(:nth-last-child(2)) {font-size: 0}
+			.breadcrumbs > .write-style-link[subdomain]:not(:nth-last-child(2))::before {
+				content: attr(subdomain);
+			}
+
+				/* "dot" after each subdomain name */
+			.breadcrumbs > .write-style-link[subdomain]::after {content: "."}
+				/* no "dot" after top-level domain */
+			.breadcrumbs > .write-style-link:nth-last-child(2)::after {content: none}
+				/* "forward slash" before path ("this URL") */
+			.breadcrumbs > .write-style-link:last-child::before {content: "\200b/"}
+			.breadcrumbs > .write-style-link:last-child:first-child::before,
+			.breadcrumbs > .write-style-link[subdomain=""] + .write-style-link::before {content: none}
+
+				/* suppress TLD-only link */
+			.breadcrumbs > .write-style-link[subdomain=""] {display: none}
+
+				/* :hover style */
+			.breadcrumbs.url\(\) > .write-style-link, /* :hover or :focus on "this URL" sets class="url()" */
+			.breadcrumbs > .write-style-link:hover,
+			.breadcrumbs > .write-style-link:focus,
+			.breadcrumbs > .write-style-link:hover ~ .write-style-link[subdomain],
+			.breadcrumbs > .write-style-link:focus ~ .write-style-link[subdomain] {
+				color: inherit;
+				text-decoration: underline;
+			}
+
+			.entry .actions {
+				display: table-cell;
+				vertical-align: middle;
+				width: 90px;
+			}
+			.entry .actions a {
+				float: right;
+				width: 24px;
+				height: 24px;
+				margin: 4px 2px;
+				padding: 0;
+				background-size: cover;
+			}
+			.entry .actions .style-edit-link {
+				background-image: url(icons2/edit_property-32.png);
+			}
+			.entry .actions .enable {
+				background-image: url(icons2/switch_off-32.png);
+			}
+			.entry .actions .disable {
+				background-image: url(icons2/switch_on-32.png);
+			}
+			.entry .actions .delete {
+				background-image: url(icons2/delete-32.png);
 			}
 			.disabled {
-				color: #BBB;
+				color: #bbb;
 			}
 			.disabled .disable {
 				display: none;
@@ -16,63 +176,30 @@
 			.enabled .enable {
 				display: none;
 			}
-			.style-name {
-				font-weight: bold;
-			}
-			.style-name img {
-				width: 16px;
-				height: 16px;
-			}
-			a, a:visited {
-				color: #000/*#072*/;
-				text-decoration:none;
-				padding-right: 5px;
-				padding-left: 5px;
-			}
-			A:hover {
-			color: #A60;
-			background: rgba(119, 119, 119, 0.2);
-			text-decoration: none;
-			-webkit-border-radius: 2px;
-			-khtml-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-			}
-			.entry {
-				padding-bottom: 2em;
-				border-bottom: 1px solid black;
-			}
-			.style-title {
-				float: left;
-			}
-			.actions {
-				float: right;
-			}
-			.actions a {
-				display: block;
-				float: left;
-				width: 24px;
-				height: 24px;
-				margin: 4px 2px;
-				padding: 0;
-				background-size: cover;
-			}
-			.actions .style-edit-link {
-				background-image: url(icons2/edit_property-32.png);
-			}
-			.actions .enable {
-				background-image: url(icons2/switch_off-32.png);
-			}
-			.actions .disable {
-				background-image: url(icons2/switch_on-32.png);
-			}
-			.actions .delete {
-				background-image: url(icons2/delete-32.png);
-			}
 			#no-styles {
 				font-weight: bold;
 			}
+			#disable-all-wrapper {
+				display: none;
+			}
 		</style>
+
+		<template data-id="style">
+			<div>
+				<div class="left-gutter">
+					<input class="checker" type="checkbox">
+				</div>
+				<div class="main-controls">
+					<div class="style-name"></div>
+					<div class="actions">
+						<a href="#" class="enable"></a>
+						<a href="#" class="disable"></a>
+						<a class="style-edit-link" href="edit.html?id="></a>
+						<a href="#" class="delete"></a>
+					</div>
+				</div>
+			</div>
+		</template>
 
 		<script src="localization.js"></script>
 		<script src="health.js"></script>
@@ -82,13 +209,29 @@
 </head>
 <body id="stylish-popup">
 
+	<div id="unavailable"><div class="left-gutter"></div><div class="main-controls"><span id="unavailable-message" i18n-text="stylishUnavailableForURL"></span></div></div>
+
 	<div id="installed"></div>
 
-	<div id="esifind-styles"><a id="esifind-styles-link" href="#"></a></div>
-	<div id="find-styles"><a id="find-styles-link" href="#"></a></div>
-	<div id="manage-styles"><a id="open-manage-link" href="manage.html"></a></div>
-	<hr>
-	<div id="esihelp"><a id="esihelp-link" href="#"></a></div>
+	<div class="actions">
+		<div id="disable-all-wrapper">
+			<div class="left-gutter">
+				<input id="disableAll" type="checkbox">
+			</div>
+			<div class="main-controls">
+				<label id="disableAll-label" for="disableAll" i18n-text="disableAllStyles"></label>
+			</div>
+		</div>
+		<div class="left-gutter"></div>
+		<div class="main-controls">
+			<div id="write-style"><span id="write-style-for" i18n-text="writeStyleFor"></span></div>
+			<div id="esifind-styles"><a id="esifind-styles-link" href="#" i18n-text="esifindStylesForSite"></a></div>
+			<div id="find-styles"><a id="find-styles-link" href="#" i18n-text="findStylesForSite"></a></div>
+			<div id="manage-styles"><a id="open-manage-link" href="manage.html" i18n-text="openManage"></a></div>
+			<div id="esihelp"><a id="esihelp-link" href="#" i18n-text="esihelp"></a></div>
+		</div>
+	</div>
+
 	<script src="popup.js"></script>
 
 </body>
