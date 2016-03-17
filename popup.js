@@ -99,19 +99,9 @@ function createStyleElement(style) {
 	styleName.setAttribute("for", "style-" + style.id);
 	styleName.checkbox = checkbox;
 	if (style.url) {
-		var homepage = document.createElement("a");
+		var homepage = e.querySelector(".style-url");
 		homepage.setAttribute("href", style.url);
 		homepage.setAttribute("target", "_blank");
-		var homepageImg = document.createElement("img");
-		homepageImg.src = "world_go.png";
-		homepageImg.alt = "*";
-		homepage.appendChild(homepageImg);
-		styleName.appendChild(homepage);
-		/*var actions = document.createElement("div");
-		actions.setAttribute("class", "actions");
-		actions.innerHTML = "<a href='#' class='delete'></a> <a class='style-edit-link' href='edit.html?id='></a> <a href='#' class='enable'></a> <a href='#' class='disable'></a>";
-		styleName.appendChild(styleN);
-		styleName.appendChild(actions);*/
 	}
 	var editLink = e.querySelector(".style-edit-link");
 	editLink.setAttribute("href", editLink.getAttribute("href") + style.id);
