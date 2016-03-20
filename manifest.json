@@ -19,9 +19,8 @@
 		"http://dreamject.org/", 
 		"http://dreamject.ru/"
 	],
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 	"background": {
-		"scripts": ["messaging.js", "storage-websql.js", "storage.js", "background.js", "analytics.js"]
+		"scripts": ["messaging.js", "storage-websql.js", "storage.js", "background.js"]
 	},
 	"commands": {
 	  "openManage": {
@@ -54,5 +53,5 @@
 		"default_title": "ESI Stylish",
 		"default_popup": "popup.html"
 	},
-	"default_locale": "en"
+	"default_locale": "ru"
 }
