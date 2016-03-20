@@ -17,7 +17,12 @@ function getDatabase(ready, error) {
 	}
 };
 
+var cachedStyles = null;
 function getStyles(options, callback) {
+	if (cachedStyles != null) {
+		callback(filterStyles(cachedStyles, options));
+		return;
+	}
 	getDatabase(function(db) {
 		var tx = db.transaction(["styles"], "readonly");
 		var os = tx.objectStore("styles");
@@ -30,44 +35,59 @@ function getStyles(options, callback) {
 				all.push(cursor.value);
 				cursor.continue();
 			} else {
+				cachedStyles = all;
 				callback(filterStyles(all, options));
 			}
 		};
   }, null);
 }
 
-function filterStyles(unfilteredStyles, options) {
+function invalidateCache(andNotify) {
+	cachedStyles = null;
+	if (andNotify) {
+		chrome.runtime.sendMessage({method: "invalidateCache"});
+	}
+}
+
+function filterStyles(styles, options) {
 	var enabled = fixBoolean(options.enabled);
 	var url = "url" in options ? options.url : null;
 	var id = "id" in options ? Number(options.id) : null;
 	var matchUrl = "matchUrl" in options ? options.matchUrl : null;
-	// Return as a hash from style to applicable sections? Can only be used with matchUrl.
-	var asHash = "asHash" in options ? options.asHash : false;
 
-	var styles = asHash ? {disableAll: prefs.get("disableAll", false)} : [];
-	unfilteredStyles.forEach(function(style) {
-		if (enabled != null && style.enabled != enabled) {
-			return;
-		}
-		if (url != null && style.url != url) {
-			return;
-		}
-		if (id != null && style.id != id) {
-			return;
-		}
-		if (matchUrl != null) {
-			var applicableSections = getApplicableSections(style, matchUrl);
-			if (applicableSections.length > 0) {
-				if (asHash) {
-					styles[style.id] = applicableSections;
-				} else {
-					styles.push(style)
+	if (enabled != null) {
+		styles = styles.filter(function(style) {
+			return style.enabled == enabled;
+		});
+	}
+	if (url != null) {
+		styles = styles.filter(function(style) {
+			return style.url == url;
+		});
+	}
+	if (id != null) {
+		styles = styles.filter(function(style) {
+			return style.id == id;
+		});
+	}
+	if (matchUrl != null) {
+		// Return as a hash from style to applicable sections? Can only be used with matchUrl.
+		var asHash = "asHash" in options ? options.asHash : false;
+		if (asHash) {
+			var h = {disableAll: prefs.get("disableAll", false)};
+			styles.forEach(function(style) {
+				var applicableSections = getApplicableSections(style, matchUrl);
+				if (applicableSections.length > 0) {
+					h[style.id] = applicableSections;
 				}
-			}
-		} else {
-			styles.push(style);
+			});
+			return h;
 		}
-	});
+		styles = styles.filter(function(style) {
+			var applicableSections = getApplicableSections(style, matchUrl);
+			return applicableSections.length > 0;
+		});
+	}
 	return styles;
 }
 
@@ -90,6 +110,7 @@ function saveStyle(o, callback) {
 				request = os.put(style);
 				request.onsuccess = function(event) {
 					notifyAllTabs({method: "styleUpdated", style: style});
+					invalidateCache(true);
 					if (callback) {
 						callback(style);
 					}
@@ -121,6 +142,7 @@ function saveStyle(o, callback) {
 		delete o["id"];
 		var request = os.add(o);
 		request.onsuccess = function(event) {
+			invalidateCache(true);
 			// Give it the ID that was generated
 			o.id = event.target.result;
 			notifyAllTabs({method: "styleAdded", style: o});
@@ -145,6 +167,7 @@ function deleteStyle(id) {
 		var request = os.delete(Number(id));
 		request.onsuccess = function(event) {
 			handleDelete(id);
+			invalidateCache(true);
 			notifyAllTabs({method: "styleDeleted", id: id});
 		};
 	});
