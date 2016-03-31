@@ -190,7 +190,10 @@ function handleUpdate(style) {
 }
 
 function handleDelete(id) {
-	installed.removeChild(installed.querySelector("[style-id='" + id + "']"));
+	var node = installed.querySelector("[style-id='" + id + "']");
+	if (node) {
+		installed.removeChild(node);
+	}
 }
 
 function doCheckUpdate(event) {
