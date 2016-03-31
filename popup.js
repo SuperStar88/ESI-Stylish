@@ -90,9 +90,9 @@ function createStyleElement(style) {
 	var e = template.style.cloneNode(true);
 	var checkbox = e.querySelector(".checker");
 	checkbox.id = "style-" + style.id;
-	checkbox.checked = style.enabled;
+	checkbox.checked = (style.enabled == "true");
 
-	e.setAttribute("class", "entry " + (style.enabled ? "enabled" : "disabled"));
+	e.setAttribute("class", "entry " + (style.enabled == "true" ? "enabled" : "disabled"));
 	e.setAttribute("style-id", style.id);
 	var styleName = e.querySelector(".style-name");
 	styleName.appendChild(document.createTextNode(style.name));
@@ -212,4 +212,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 document.getElementById("disableAll").addEventListener("change", function(event) {
 	installed.classList.toggle("disabled", prefs.get("disableAll"));
 });
-setupLivePrefs(["disableAll"]);
+//setupLivePrefs(["disableAll"]);
