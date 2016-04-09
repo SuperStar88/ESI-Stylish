@@ -212,4 +212,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 document.getElementById("disableAll").addEventListener("change", function(event) {
 	installed.classList.toggle("disabled", prefs.get("disableAll"));
 });
-//setupLivePrefs(["disableAll"]);
+setupLivePrefs(["disableAll"]);
