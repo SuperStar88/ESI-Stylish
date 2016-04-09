@@ -64,7 +64,7 @@
 		"description": "'Yes' button in a confirm dialog"
 	},
 	"findStylesForSite": {
-		"message": "Найдите другие стили для этого веб-сайта.",
+		"message": "Найдите другие стили для этого веб-сайта",
 		"description": "Text for a link that gets a list of styles for the current site"
 	},
 	"manageHeading": {
@@ -264,7 +264,7 @@
 		"description": "Label for 'applies to' fields on the edit/add screen"
 	},
 	"openManage": {
-		"message": "Управление установленными стилями.",
+		"message": "Управление установленными стилями",
 		"description": "Link to open the manage page."
 	},
 	"updateCheckFailBadResponseCode": {
